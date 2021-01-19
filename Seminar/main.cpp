@@ -60,10 +60,9 @@ void MyMainWindow::mousePressEvent(QMouseEvent* event){
     if(event->button() == Qt::LeftButton){
         MyLabel->move(event->x(), event->y());
     }
-    statusBar()->showMessage(QString("x: %1 | y: %2 | String length: %3").arg(MyLabel->pos().x()).arg(MyLabel->pos().y()).arg(MyLabel->text().size()));
+    stat->setText(QString("x: %1 | y: %2 | String lenght: %3").arg(MyLabel->pos().x()).arg(MyLabel->pos().y()).arg(MyLabel->text().size()));
+    statusBar()->addWidget(stat);
 }
-
-
 void MyMainWindow::keyPressEvent(QKeyEvent *event){
     switch(event->key()){
         case Qt::Key_Left:
@@ -79,7 +78,8 @@ void MyMainWindow::keyPressEvent(QKeyEvent *event){
         MyLabel->move(MyLabel->pos().x(), MyLabel->pos().y()+1);
         break;
     }
-    statusBar()->showMessage(QString("x: %1 | y: %2 | String length: %3").arg(MyLabel->pos().x()).arg(MyLabel->pos().y()).arg(MyLabel->text().size()));
+    stat->setText(QString("x: %1 | y: %2 | String lenght: %3").arg(MyLabel->pos().x()).arg(MyLabel->pos().y()).arg(MyLabel->text().size()));
+    statusBar()->addWidget(stat);
 }
 void MyMainWindow::paintEvent(QPaintEvent *event){
     QSize size = this->size();
@@ -101,17 +101,13 @@ MyDialog::MyDialog(){
     mainLayout->addWidget(buttonBox);
     setLayout(mainLayout);
     setWindowTitle("Promjena teksta");
-
-
 }
 
 MyMainWindow::MyMainWindow()
 {
-
     MyLabel = new QLabel(this);
     MyLabel->setText("Hello World");
     MyLabel->move(10, 20);
-
 
     EditNoviTekst = new QAction(tr("&Novi tekst..."), this);
     EditNoviTekst->setShortcut(tr("CTRL+N"));
